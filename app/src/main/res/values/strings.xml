@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">SMART FRONT DESK</string>
+    <string name="title_activity_request">RequestActivity</string>
+    <string name="user_name">SUNSET HOTEL</string>
+    <string name="company_code">10005</string>
+    <string name="content1">안녕하십니까, 환영 합니다.</string>
+    <string name="content2">편안한 여행이 되도록 최선의 노력을 하겠습니다.</string>
+    <string name="folio_content1">무엇으로 결제해 드릴까요?</string>
+
+    <!--강한별-->
+    <string name="content3">안녕하세요. 환영 합니다.</string>
+
+    <string name="RESERVATION1">예약번호</string>
+    <string name="RESERVATION2">RESERVATION</string>
+    <string name="NAME1">RESERVATION</string>
+    <string name="NAME2">RESERVATION</string>
+    <string name="TELL1">전화번호 </string>
+    <string name="TELL2">RESERVATION</string>
+    <string name="title_activity_test">testActivity</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+</resources>
