@@ -61,9 +61,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginTop="230dp"
-            android:layout_marginBottom="230dp"
+            android:layout_marginTop="250dp"
             android:gravity="center">
 
             <TextView
@@ -105,18 +103,6 @@
             android:text="확  인"
             android:textColor="#FFFFFF"
             android:textSize="20sp" />
-
-        <CheckBox
-            android:id="@+id/verCheck1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="34dp"
-            android:layout_marginEnd="50dp"
-            android:buttonTint="#000000"
-            android:minHeight="48dp"
-            android:text="ENG.ver" />
 
     </RelativeLayout>
 

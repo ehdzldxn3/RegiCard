@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -91,16 +92,16 @@ public class RegistrationCardOkFragment<editTe> extends Fragment {
         bundle = getArguments();
         RegicardDTO item = (RegicardDTO) bundle.getSerializable("item");
 
-        //아이디 찾기 함수
+//        아이디 찾기 함수
         findId();
 
-        //버전체크
+//        버전체크
         if (bundle.getString("ver") == "KOR") {
             verKorchange();
         }
         //아이템셋팅
         if( item != null) {
-            setItem(item);
+            //setItem(item);
             resno = item.resno;
         }
 
@@ -331,12 +332,23 @@ public class RegistrationCardOkFragment<editTe> extends Fragment {
                 //메인화면 넘어가기
 
                 activity.fragmentChange("MAIN", bundle);
-
+                Toast.makeText(getActivity(), "저장 되었습니다.", Toast.LENGTH_SHORT).show();
 
             }
 
             @Override
             public void onFailure(Call call, Throwable t) {
+                AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
+                alert.setTitle("알림");
+                alert.setMessage("통신 에러 입니다.  " + t);
+                alert.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();     //닫기
+                    }
+                });
+                AlertDialog dialog = alert.show();       // alert.setMessage 글자 폰트 사이즈 조정
+                TextView msgView = (TextView) dialog.findViewById(android.R.id.message);
+                msgView.setTextSize(20);
 
             }
         });

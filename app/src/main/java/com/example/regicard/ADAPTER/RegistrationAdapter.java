@@ -51,7 +51,7 @@ public class RegistrationAdapter extends RecyclerView.Adapter<RegistrationAdapte
                 bundle.putString("ver", ver);
                 fragment_registration_card_ok = new RegistrationCardOkFragment();
                 fragment_registration_card_ok.setArguments(bundle);
-                activity.getSupportFragmentManager().beginTransaction().addToBackStack(null)
+                activity.getSupportFragmentManager().beginTransaction()
                         .replace(R.id.main_frame, fragment_registration_card_ok).commit();
             }
         });

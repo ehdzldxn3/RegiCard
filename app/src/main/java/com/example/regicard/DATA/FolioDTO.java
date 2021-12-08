@@ -42,6 +42,42 @@ public class FolioDTO implements Serializable {
     @Expose //null일때 생략하는것
     public String debit;
 
+    @SerializedName("RESER_ARRDATE") //json 매칭 될떄 이름명시목적
+    @Expose //null일때 생략하는것
+    public String reser_arrdate;
+
+    @SerializedName("RESER_DEPDATE") //json 매칭 될떄 이름명시목적
+    @Expose //null일때 생략하는것
+    public String reser_depdate;
+
+    @SerializedName("RESER_CUST_NAME") //json 매칭 될떄 이름명시목적
+    @Expose //null일때 생략하는것
+    public String reser_cust_name;
+
+    public String getReser_arrdate() {
+        return reser_arrdate;
+    }
+
+    public void setReser_arrdate(String reser_arrdate) {
+        this.reser_arrdate = reser_arrdate;
+    }
+
+    public String getReser_depdate() {
+        return reser_depdate;
+    }
+
+    public void setReser_depdate(String reser_depdate) {
+        this.reser_depdate = reser_depdate;
+    }
+
+    public String getReser_cust_name() {
+        return reser_cust_name;
+    }
+
+    public void setReser_cust_name(String reser_cust_name) {
+        this.reser_cust_name = reser_cust_name;
+    }
+
     public String getReser_no() {
         return reser_no;
     }

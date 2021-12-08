@@ -158,14 +158,14 @@ public class RegimainFragment extends Fragment {
         fragmentManager.beginTransaction().remove(RegimainFragment.this).commit();
         fragmentManager.popBackStack();
 
-        //fragment_regicard로 번들 전달
-        fragment_regicard.setArguments(bundle);
-        MainActivity.fragmentStack.push(fragment_regicard);
-        fm = getFragmentManager();
-        tran = fm.beginTransaction();
-        tran.replace(R.id.main_frame, fragment_regicard);
-        tran.addToBackStack(null);
-        tran.commit();
+//        //fragment_regicard로 번들 전달
+//        fragment_regicard.setArguments(bundle);
+//        MainActivity.fragmentStack.push(fragment_regicard);
+//        fm = getFragmentManager();
+//        tran = fm.beginTransaction();
+//        tran.replace(R.id.main_frame, fragment_regicard);
+//        tran.addToBackStack(null);
+//        tran.commit();
     }
 
     private void fstartintent(int guestidx, List<RegicardRestDTO> RegicardRestDTOs) {
@@ -187,13 +187,13 @@ public class RegimainFragment extends Fragment {
         fragmentManager.popBackStack();
 
         //fragment_regicard로 번들 전달
-        fragment_foliomain.setArguments(bundle);
-        MainActivity.fragmentStack.push(fragment_foliomain);
-        fm = getFragmentManager();
-        tran = fm.beginTransaction();
-        tran.replace(R.id.main_frame, fragment_foliomain);
-        tran.addToBackStack(null);
-        tran.commit();
+//        fragment_foliomain.setArguments(bundle);
+//        MainActivity.fragmentStack.push(fragment_foliomain);
+//        fm = getFragmentManager();
+//        tran = fm.beginTransaction();
+//        tran.replace(R.id.main_frame, fragment_foliomain);
+//        tran.addToBackStack(null);
+//        tran.commit();
     }
 
 

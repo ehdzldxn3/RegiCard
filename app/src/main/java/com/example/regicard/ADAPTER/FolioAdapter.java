@@ -13,6 +13,7 @@ import com.example.regicard.DATA.RegicardDTO;
 import com.example.regicard.MainActivity;
 import com.example.regicard.R;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,9 +40,10 @@ public class FolioAdapter extends RecyclerView.Adapter<FolioAdapter.FolioViewHod
 
     @Override
     public void onBindViewHolder(@NonNull FolioViewHoder holder, int position) {
+        DecimalFormat formatter = new DecimalFormat("###,###");
         FolioDTO item = list.get(position);
-        holder.f_item_credit.setText(item.getCredit());
-        holder.f_item_debit.setText(item.getDebit());
+        holder.f_item_credit.setText(formatter.format(Integer.parseInt(item.getCredit())));
+        holder.f_item_debit.setText(formatter.format(Integer.parseInt(item.getDebit())));
         holder.f_item_account.setText(item.getFolio_desc());
         holder.f_item_date.setText(item.getFolio_auditdate());
     }

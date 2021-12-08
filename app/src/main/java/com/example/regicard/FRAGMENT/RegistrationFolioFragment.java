@@ -23,6 +23,7 @@ import com.example.regicard.RETROFIT.RetrofitService;
 import com.example.regicard.RETROFIT.ServiceGenerator;
 
 import java.io.Serializable;
+import java.text.DecimalFormat;
 import java.util.List;
 
 import retrofit2.Call;
@@ -39,6 +40,8 @@ public class RegistrationFolioFragment extends Fragment {
     EditText editFolioRoomNo;
 
     MainActivity activity;
+
+    String TAG = "Folio";
 
     @Nullable
     @Override
@@ -61,21 +64,51 @@ public class RegistrationFolioFragment extends Fragment {
                     @Override
                     public void onResponse(Call<List<FolioDTO>> call, Response<List<FolioDTO>> response) {
                         List<FolioDTO> list = response.body();
-//                        bundle.putString("ver", ver);
-                        int credit = 0, debit = 0;
-                        int balance = 0;
-                        for(int i=0; i<list.size(); i++){
-                            credit += Integer.parseInt(list.get(i).getCredit());
-                            debit += Integer.parseInt(list.get(i).getDebit());
+
+                        if(list.size() == 0) {
+                            AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
+                            alert.setTitle("알림");
+                            alert.setMessage("데이터가 없습니다.  " );
+                            alert.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();     //닫기
+                                }
+                            });
+                            AlertDialog dialog = alert.show();       // alert.setMessage 글자 폰트 사이즈 조정
+                            TextView msgView = (TextView) dialog.findViewById(android.R.id.message);
+                            msgView.setTextSize(20);
+                            new android.os.Handler().postDelayed(
+                                    new Runnable() {
+                                        public void run() {
+                                            dialog.dismiss();
+                                        }
+                                    }, 1000);
+                        } else {
+                            int credit = 0, debit = 0;
+                            int balance = 0;
+                            for(int i=0; i<list.size(); i++){
+                                credit += Integer.parseInt(list.get(i).getCredit());
+                                debit += Integer.parseInt(list.get(i).getDebit());
+                            }
+                            bundle.putInt("balance",credit-debit);
+                            bundle.putSerializable("list", (Serializable) list);
+                            activity.fragmentChange("FOLIO", bundle);
                         }
-                        bundle.putInt("balance",credit-debit);
-                        bundle.putSerializable("list", (Serializable) list);
-                        activity.fragmentChange("FOLIO", bundle);
                     }
 
                     @Override
                     public void onFailure(Call<List<FolioDTO>> call, Throwable t) {
-
+                        AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
+                        alert.setTitle("알림");
+                        alert.setMessage("통신 에러 입니다.  " + t);
+                        alert.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();     //닫기
+                            }
+                        });
+                        AlertDialog dialog = alert.show();       // alert.setMessage 글자 폰트 사이즈 조정
+                        TextView msgView = (TextView) dialog.findViewById(android.R.id.message);
+                        msgView.setTextSize(20);
                     }
                 });
             }

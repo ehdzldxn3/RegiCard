@@ -1,8 +1,11 @@
 
 package com.example.regicard;
 
+import static androidx.core.content.ContextCompat.getSystemService;
+
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -19,6 +22,7 @@ import com.example.regicard.FRAGMENT.RegistrationCardListFragment;
 import com.example.regicard.FRAGMENT.RegistrationCardOkFragment;
 import com.example.regicard.FRAGMENT.RegistrationFolioFragment;
 import com.example.regicard.FRAGMENT.RegistrationFolioOkFragment;
+import com.example.regicard.FRAGMENT.testFragment;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
@@ -27,13 +31,16 @@ import java.util.List;
 import java.util.Stack;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
     FragmentManager fm;
     FragmentTransaction tran;
     RegimainFragment fragment_regimain;
-    RegistartFragment fragment_registart; //시작화면
+
     RegifoliomainFragment fragment_foliomain;
     String choice_flag = "", User_Name, company_code;
 
@@ -44,13 +51,16 @@ public class MainActivity extends AppCompatActivity {
     Bundle bundle;
 
     //강한별
+    androidx.fragment.app.FragmentManager fmx;
+    RegistartFragment fragment_registart; //시작화면
     RegistrationCardFragment fragment_registration_card;
     RegistrationCardOkFragment fragment_registration_card_ok;
     RegistrationCardListFragment fragment_registration_card_List;
     RegistrationFolioFragment fragment_registration_folio;
     RegistrationFolioOkFragment fragment_registration_folio_ok;
 
-
+    //test
+    testFragment test;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,13 +73,12 @@ public class MainActivity extends AppCompatActivity {
         company_code = getString(R.string.company_code);
 
         fragment_registart = new RegistartFragment(); //프래그먼트 객채셍성
-        fragmentStack = new Stack<>();
-        fragmentStack.push(fragment_registart);
-        fm = getFragmentManager();
-        tran = fm.beginTransaction();
-        tran.replace(R.id.main_frame, fragment_registart);
-//        tran.addToBackStack(null);    //강한별 삭제 처음 프래그먼트 스택 쌓을 필요없음
-        tran.commit();
+
+
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.main_frame, new RegistartFragment()).commit();
+
+
 
         //강한별
         fragment_registration_card_ok = new RegistrationCardOkFragment();
@@ -77,6 +86,12 @@ public class MainActivity extends AppCompatActivity {
         fragment_registration_card_List = new RegistrationCardListFragment();
         fragment_registration_folio = new RegistrationFolioFragment();
         bundle = new Bundle();
+
+
+        //test
+        test = new testFragment();
+
+
     }
 
 
@@ -84,45 +99,28 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         bundle.putString("para_cmpny_cd", company_code);
+
         switch (item.getItemId()) {
 
-
             case R.id.regicard_btn:
-                bundle = new Bundle();
-                bundle.putString("para_cmpny_cd", company_code);
-                bundle.putString("para_gubun", "R");
-                bundle.putString("test", "테스트입니다.");
-                fragmentStack.clear();
-                fragment_registration_card = new RegistrationCardFragment(); //프래그먼트 객채셍성
-                fm = getFragmentManager();
-
-                //강한별
-                //모든 프래그먼트 스택 지우기
-                fm.popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-
-                //강한별
-                tran = fm.beginTransaction();
-                tran.replace(R.id.main_frame, fragment_registration_card);
-                tran.addToBackStack(null);
                 fragment_registration_card.setArguments(bundle);
-                tran.commit();
+                getSupportFragmentManager().beginTransaction().addToBackStack(null)
+                        .replace(R.id.main_frame, fragment_registration_card).commit();
+
                 return true;
 
-
-
             case R.id.folio_btn:
-                bundle = new Bundle();
                 fragment_registration_folio.setArguments(bundle);
-                bundle.putString("para_cmpny_cd", company_code);
-                bundle.putString("para_gubun", "R");
-                bundle.putString("test", "테스트입니다.");
                 getSupportFragmentManager().beginTransaction().addToBackStack(null)
                         .replace(R.id.main_frame, fragment_registration_folio).commit();
                 return true;
 
             case R.id.exit_btn:
-                exitBtn();
+                getSupportFragmentManager().beginTransaction().addToBackStack(null)
+                        .replace(R.id.main_frame, test).commit();
+//                exitBtn();
                 return true;
+
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -164,17 +162,15 @@ public class MainActivity extends AppCompatActivity {
 
         if(change == "MAIN") {
 
-            fragmentStack.clear();
-            fm.popBackStackImmediate();
-            getFragmentManager().beginTransaction()
+            //강한별
+            //모든 프래그먼트 스택 지우기
+
+            getSupportFragmentManager().beginTransaction()
                     .replace(R.id.main_frame, new RegistartFragment()).commit();
 
         } else if (change == "LIST"){
             List<RegicardDTO> list = (List<RegicardDTO>) bundle.getSerializable("list");
-
-            fragment_registration_card_List = new RegistrationCardListFragment();
             fragment_registration_card_List.setArguments(bundle);
-            fragmentStack.clear();
             getSupportFragmentManager().beginTransaction().addToBackStack(null)
                     .replace(R.id.main_frame, fragment_registration_card_List).commit();
 
@@ -189,17 +185,16 @@ public class MainActivity extends AppCompatActivity {
             }
             bundle.putString("ver", ver);
             bundle.putSerializable("item", (Serializable) item);
-            fragment_registration_card_ok = new RegistrationCardOkFragment();
             fragment_registration_card_ok.setArguments(bundle);
-            fragmentStack.clear();
             getSupportFragmentManager().beginTransaction().addToBackStack(null)
                     .replace(R.id.main_frame, fragment_registration_card_ok).commit();
         } else if (change == "FOLIO") {
+
             List<FolioDTO> list = (List<FolioDTO>) bundle.getSerializable("list");
+            bundle.putSerializable("item", (Serializable) list.get(0));
             fragment_registration_folio_ok = new RegistrationFolioOkFragment();
             fragment_registration_folio_ok.setArguments(bundle);
-            fragmentStack.clear();
-            getSupportFragmentManager().beginTransaction().addToBackStack(null)
+            getSupportFragmentManager().beginTransaction()
                     .replace(R.id.main_frame, fragment_registration_folio_ok).commit();
         }
     }

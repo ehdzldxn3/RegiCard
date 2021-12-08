@@ -1,7 +1,6 @@
 package com.example.regicard.FRAGMENT;
 
 import android.app.AlertDialog;
-import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -17,6 +16,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 import com.example.regicard.DATA.RegicardDTO;
 import com.example.regicard.MainActivity;
@@ -99,12 +99,34 @@ public class RegistrationCardFragment extends Fragment {
                                 bundle.putString("ver", ver);
                                 bundle.putSerializable("list", (Serializable) list);
                                 activity.fragmentChange("OK", bundle);
+                                editText1.setText("");
+                                editText2.setText("");
+                                editText3.setText("");
                             } else if(list.size() > 1){
                                 bundle.putString("ver", ver);
                                 bundle.putSerializable("list", (Serializable) list);
                                 activity.fragmentChange("LIST", bundle);
+                                editText1.setText("");
+                                editText2.setText("");
+                                editText3.setText("");
                             } else {
-                                Toast.makeText(getActivity(), "데이터가 없습니다.", Toast.LENGTH_SHORT).show();
+                                AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
+                                alert.setTitle("알림");
+                                alert.setMessage("데이터가 없습니다.  " );
+                                alert.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dialog.dismiss();     //닫기
+                                    }
+                                });
+                                AlertDialog dialog = alert.show();       // alert.setMessage 글자 폰트 사이즈 조정
+                                TextView msgView = (TextView) dialog.findViewById(android.R.id.message);
+                                msgView.setTextSize(20);
+                                new android.os.Handler().postDelayed(
+                                        new Runnable() {
+                                            public void run() {
+                                                dialog.dismiss();
+                                            }
+                                        }, 1000);
                             }
                         }
                         @Override

@@ -62,7 +62,7 @@
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:paddingLeft="5dp"
-                tools:ignore="TouchTargetSizeCheck,TouchTargetSizeCheck,TouchTargetSizeCheck" />
+                tools:ignore="TouchTargetSizeCheck,TouchTargetSizeCheck,TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
         </LinearLayout>
 
@@ -92,7 +92,7 @@
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:paddingLeft="5dp"
-                tools:ignore="TouchTargetSizeCheck,TouchTargetSizeCheck,TouchTargetSizeCheck" />
+                tools:ignore="TouchTargetSizeCheck,TouchTargetSizeCheck,TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
             <TextView
                 android:id="@+id/textDepartureDate"
@@ -164,7 +164,7 @@
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:paddingLeft="5dp"
-                tools:ignore="TouchTargetSizeCheck,TouchTargetSizeCheck" />
+                tools:ignore="TouchTargetSizeCheck,TouchTargetSizeCheck,SpeakableTextPresentCheck" />
         </LinearLayout>
 
         <LinearLayout
@@ -244,7 +244,7 @@
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:paddingLeft="5dp"
-                tools:ignore="TouchTargetSizeCheck" />
+                tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
             <TextView
                 android:id="@+id/textTel"
@@ -295,7 +295,7 @@
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:paddingLeft="5dp"
-                tools:ignore="TouchTargetSizeCheck" />
+                tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
             <TextView
                 android:id="@+id/textCarNo"
@@ -316,7 +316,7 @@
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:paddingLeft="5dp"
-                tools:ignore="TouchTargetSizeCheck" />
+                tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
         </LinearLayout>
 
@@ -346,7 +346,7 @@
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:paddingLeft="5dp"
-                tools:ignore="TouchTargetSizeCheck" />
+                tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
             <TextView
                 android:id="@+id/textNationality"
@@ -367,7 +367,7 @@
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:paddingLeft="5dp"
-                tools:ignore="TouchTargetSizeCheck" />
+                tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
         </LinearLayout>
 
         <LinearLayout
@@ -396,7 +396,7 @@
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:paddingLeft="5dp"
-                tools:ignore="TouchTargetSizeCheck" />
+                tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
             <TextView
                 android:id="@+id/textPurposeofVisit"
@@ -417,7 +417,7 @@
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:paddingLeft="5dp"
-                tools:ignore="TouchTargetSizeCheck" />
+                tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
         </LinearLayout>
 
         <LinearLayout
