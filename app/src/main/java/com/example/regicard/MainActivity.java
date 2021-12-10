@@ -4,9 +4,11 @@ package com.example.regicard;
 import static androidx.core.content.ContextCompat.getSystemService;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -31,6 +33,7 @@ import java.util.List;
 import java.util.Stack;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -59,6 +62,8 @@ public class MainActivity extends AppCompatActivity {
     RegistrationFolioFragment fragment_registration_folio;
     RegistrationFolioOkFragment fragment_registration_folio_ok;
 
+    Button btn_folio, bth_home, btn_regiCard;
+
     //test
     testFragment test;
 
@@ -86,45 +91,79 @@ public class MainActivity extends AppCompatActivity {
         fragment_registration_card_List = new RegistrationCardListFragment();
         fragment_registration_folio = new RegistrationFolioFragment();
         bundle = new Bundle();
+        
+        //상단 액션바 숨기기
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.hide();
+        //하단 네비게이션 버튼
+        btn_folio = findViewById(R.id.btn_folio);
+        bth_home = findViewById(R.id.bth_home);
+        btn_regiCard = findViewById(R.id.btn_regiCard);
 
 
         //test
         test = new testFragment();
 
-
-    }
-
-
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        bundle.putString("para_cmpny_cd", company_code);
-
-        switch (item.getItemId()) {
-
-            case R.id.regicard_btn:
-                fragment_registration_card.setArguments(bundle);
-                getSupportFragmentManager().beginTransaction().addToBackStack(null)
-                        .replace(R.id.main_frame, fragment_registration_card).commit();
-
-                return true;
-
-            case R.id.folio_btn:
+        //폴리오 화면 이동
+        btn_folio.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
                 fragment_registration_folio.setArguments(bundle);
                 getSupportFragmentManager().beginTransaction().addToBackStack(null)
                         .replace(R.id.main_frame, fragment_registration_folio).commit();
-                return true;
-
-            case R.id.exit_btn:
+            }
+        });
+        //레지카드화면이동
+        btn_regiCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                fragment_registration_card.setArguments(bundle);
                 getSupportFragmentManager().beginTransaction().addToBackStack(null)
-                        .replace(R.id.main_frame, test).commit();
-//                exitBtn();
-                return true;
+                        .replace(R.id.main_frame, fragment_registration_card).commit();
+            }
+        });
+        //홈화면 이동
+        bth_home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.main_frame, new RegistartFragment()).commit();
+            }
+        });
 
-            default:
-                return super.onOptionsItemSelected(item);
-        }
     }
+
+
+
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        bundle.putString("para_cmpny_cd", company_code);
+//
+//        switch (item.getItemId()) {
+//
+//            case R.id.regicard_btn:
+//                fragment_registration_card.setArguments(bundle);
+//                getSupportFragmentManager().beginTransaction().addToBackStack(null)
+//                        .replace(R.id.main_frame, fragment_registration_card).commit();
+//
+//                return true;
+//
+//            case R.id.folio_btn:
+//                fragment_registration_folio.setArguments(bundle);
+//                getSupportFragmentManager().beginTransaction().addToBackStack(null)
+//                        .replace(R.id.main_frame, fragment_registration_folio).commit();
+//                return true;
+//
+//            case R.id.exit_btn:
+//                getSupportFragmentManager().beginTransaction().addToBackStack(null)
+//                        .replace(R.id.main_frame, test).commit();
+////                exitBtn();
+//                return true;
+//
+//            default:
+//                return super.onOptionsItemSelected(item);
+//        }
+//    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -194,8 +233,33 @@ public class MainActivity extends AppCompatActivity {
             bundle.putSerializable("item", (Serializable) list.get(0));
             fragment_registration_folio_ok = new RegistrationFolioOkFragment();
             fragment_registration_folio_ok.setArguments(bundle);
-            getSupportFragmentManager().beginTransaction()
+            getSupportFragmentManager().beginTransaction().addToBackStack(null)
                     .replace(R.id.main_frame, fragment_registration_folio_ok).commit();
+        }
+    }
+
+    //바깥화면 클릭시 키보드 내림
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        View focusView = getCurrentFocus();
+        if (focusView != null) {
+            Rect rect = new Rect();
+            focusView.getGlobalVisibleRect(rect);
+            int x = (int) ev.getX(), y = (int) ev.getY();
+            if (!rect.contains(x, y)) {
+                InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+                if (imm != null)
+                    imm.hideSoftInputFromWindow(focusView.getWindowToken(), 0);
+                focusView.clearFocus();
+            }
+        }
+        return super.dispatchTouchEvent(ev);
+    }
+    //모든 스택 다 지우기
+    private void clearBackStack() {
+        final androidx.fragment.app.FragmentManager fragmentManager = getSupportFragmentManager();
+        while (fragmentManager.getBackStackEntryCount() != 0) {
+            fragmentManager.popBackStackImmediate();
         }
     }
 }

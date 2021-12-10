@@ -51,7 +51,7 @@ public class RegistrationFolioFragment extends Fragment {
         Bundle bundle = getArguments();
 
         editFolioRoomNo = viewGroup.findViewById(R.id.editFolioRoomNo);
-        btnFlioOK = viewGroup.findViewById(R.id.btnFolioOK);
+        btnFlioOK = viewGroup.findViewById(R.id.btnFlioOK);
         activity = (MainActivity) getActivity();
 
         //확인버튼 클릭리스너너
@@ -77,12 +77,6 @@ public class RegistrationFolioFragment extends Fragment {
                             AlertDialog dialog = alert.show();       // alert.setMessage 글자 폰트 사이즈 조정
                             TextView msgView = (TextView) dialog.findViewById(android.R.id.message);
                             msgView.setTextSize(20);
-                            new android.os.Handler().postDelayed(
-                                    new Runnable() {
-                                        public void run() {
-                                            dialog.dismiss();
-                                        }
-                                    }, 1000);
                         } else {
                             int credit = 0, debit = 0;
                             int balance = 0;

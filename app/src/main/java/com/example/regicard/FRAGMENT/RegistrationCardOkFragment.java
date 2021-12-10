@@ -101,7 +101,7 @@ public class RegistrationCardOkFragment<editTe> extends Fragment {
         }
         //아이템셋팅
         if( item != null) {
-            //setItem(item);
+            setItem(item);
             resno = item.resno;
         }
 
@@ -187,7 +187,7 @@ public class RegistrationCardOkFragment<editTe> extends Fragment {
         editAdult.setText(item.getAdult());
         editChild.setText(item.getChild());
         editName.setText(item.getName());
-        editTel.setText(item.getTel());
+        editTel.setText(item.getPhone());
         editCompany.setText(item.getCompanynm());
         editNationality.setText(item.getNation());
         editPassportNo.setText(item.getPassport());

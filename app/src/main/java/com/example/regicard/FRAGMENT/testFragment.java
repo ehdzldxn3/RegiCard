@@ -24,12 +24,8 @@ public class testFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         viewGroup = (ViewGroup) inflater.inflate(R.layout.test, container, false);
-
-
-//        InputMethodManager mInputMethodManager = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-//        mInputMethodManager.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
-
-
         return viewGroup;
     }
+
+
 }
