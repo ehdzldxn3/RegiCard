@@ -5,13 +5,16 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,6 +33,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -52,7 +56,7 @@ public class RegistrationCardOkFragment<editTe> extends Fragment {
 
     //editText
     EditText editArrivalDate, editDepartureDate, editRoomNo, editNights, editAdult, editChild, editName, editTel, editAddr, editCarNo, editCompany, editNationality,
-            editPassportNo, editPurposeofVisit, editRemark;
+            editPassportNo, editPurposeofVisit, editRemark, editTel1, editTel2, editTel3;
 
     //체크박스
     CheckBox checkConsent;
@@ -73,7 +77,11 @@ public class RegistrationCardOkFragment<editTe> extends Fragment {
     Fragment fragment_registration_start;
     Bundle bundle;
 
+    String date, tomorrow;  //날짜
+
     String TAG = "RegistrationCardOkFragment : ";
+
+    RelativeLayout tel_dialog;
 
 
 
@@ -104,6 +112,12 @@ public class RegistrationCardOkFragment<editTe> extends Fragment {
             setItem(item);
             resno = item.resno;
         }
+
+        //WalkIn 확인
+        if ( "NEW" == bundle.getString("check")) {
+            walkIn();
+        }
+
 
         //액티비티 초기화
         activity = (MainActivity)getContext();
@@ -173,13 +187,62 @@ public class RegistrationCardOkFragment<editTe> extends Fragment {
 
 
 
+        //수정막기
+        //editTel.setInputType(InputType.TYPE_NULL);
+//        editTel.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//
+//
+//                //알러트창 띄움
+//                tel_dialog = (RelativeLayout) View.inflate(activity, R.layout.tel_dialog, null);
+//                AlertDialog.Builder dig = new AlertDialog.Builder(activity);
+//                dig.setTitle("연락처 입력");
+//                dig.setView(tel_dialog);
+//
+//                dig.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialogInterface, int i) {
+//                        editTel1 = tel_dialog.findViewById(R.id.editTel1);
+//                        editTel2 = tel_dialog.findViewById(R.id.editTel2);
+//                        editTel3 = tel_dialog.findViewById(R.id.editTel3);
+//
+//                        if(editTel1.getText().toString() != "" && editTel2.getText().toString() != "" && editTel3.getText().toString() != "") {
+//                            editTel.setText(editTel1.getText() + "-" + editTel2.getText() + "-" + editTel3.getText());
+//                        }
+//                    }
+//                });
+//                dig.setNegativeButton("취소", null);
+//                dig.show();
+//            }
+//        });
+
 
         return viewGroup;
 
     }
 
+    //walk In 셋팅
+    public void walkIn() {
+        Calendar cal = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        //오늘날짜
+        date = sdf.format(cal.getTime());
+        //내일날짜
+        cal.add(cal.DATE, +1);
+        tomorrow = sdf.format(cal.getTime());
+
+        editArrivalDate.setText(date);
+        editDepartureDate.setText(tomorrow);
+        editAdult.setText("1");
+        editChild.setText("0");
+        editNights.setText("1");
+    }
+
     //데이터 셋팅 함수
-    private void setItem(RegicardDTO item) {
+    public void setItem(RegicardDTO item) {
+        editTel.setText(item.getPhone());
         editArrivalDate.setText(item.getArrdt());
         editDepartureDate.setText(item.getDepdt());
         editRoomNo.setText(item.getRoomno());
@@ -187,7 +250,6 @@ public class RegistrationCardOkFragment<editTe> extends Fragment {
         editAdult.setText(item.getAdult());
         editChild.setText(item.getChild());
         editName.setText(item.getName());
-        editTel.setText(item.getPhone());
         editCompany.setText(item.getCompanynm());
         editNationality.setText(item.getNation());
         editPassportNo.setText(item.getPassport());
@@ -213,6 +275,9 @@ public class RegistrationCardOkFragment<editTe> extends Fragment {
         textRemark.setText("기타사항");
         textConsent.setText("개인정보의 제공 및 활용에 동의 하십니까?");
         checkConsent.setText("동의");
+        editTel.setHint(" -는 입력 할수 없습니다.");
+        editCarNo.setHint(" 000 가 1234");
+
     }
 
     //아이디 찾기 함수

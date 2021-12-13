@@ -101,6 +101,7 @@ public class MainActivity extends AppCompatActivity {
         btn_regiCard = findViewById(R.id.btn_regiCard);
 
 
+
         //test
         test = new testFragment();
 
@@ -109,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 fragment_registration_folio.setArguments(bundle);
-                getSupportFragmentManager().beginTransaction().addToBackStack(null)
+                getSupportFragmentManager().beginTransaction().addToBackStack(null).remove(fragment_registration_folio)
                         .replace(R.id.main_frame, fragment_registration_folio).commit();
             }
         });
@@ -118,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 fragment_registration_card.setArguments(bundle);
-                getSupportFragmentManager().beginTransaction().addToBackStack(null)
+                getSupportFragmentManager().beginTransaction().addToBackStack(null).remove(fragment_registration_card)
                         .replace(R.id.main_frame, fragment_registration_card).commit();
             }
         });
@@ -222,6 +223,7 @@ public class MainActivity extends AppCompatActivity {
             } else {
                 item = null;
             }
+            bundle.putString("check", "old");
             bundle.putString("ver", ver);
             bundle.putSerializable("item", (Serializable) item);
             fragment_registration_card_ok.setArguments(bundle);
@@ -235,6 +237,13 @@ public class MainActivity extends AppCompatActivity {
             fragment_registration_folio_ok.setArguments(bundle);
             getSupportFragmentManager().beginTransaction().addToBackStack(null)
                     .replace(R.id.main_frame, fragment_registration_folio_ok).commit();
+        } else if (change == "NEW") {
+
+            bundle.putString("ver", bundle.getString("ver"));
+            bundle.putString("check", "NEW");
+            fragment_registration_card_ok.setArguments(bundle);
+            getSupportFragmentManager().beginTransaction().addToBackStack(null)
+                    .replace(R.id.main_frame, fragment_registration_card_ok).commit();
         }
     }
 

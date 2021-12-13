@@ -84,6 +84,7 @@ public class RegistrationFolioFragment extends Fragment {
                                 credit += Integer.parseInt(list.get(i).getCredit());
                                 debit += Integer.parseInt(list.get(i).getDebit());
                             }
+                            editFolioRoomNo.setText("");
                             bundle.putInt("balance",credit-debit);
                             bundle.putSerializable("list", (Serializable) list);
                             activity.fragmentChange("FOLIO", bundle);

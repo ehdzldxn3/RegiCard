@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center"
-    android:background="#f5f5f5"
     android:orientation="vertical">
 
     <LinearLayout
@@ -56,8 +55,7 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#FFFFFF">
+            android:layout_height="wrap_content">
 
             <LinearLayout
                 android:id="@+id/layout1"
@@ -157,9 +155,9 @@
                     android:layout_below="@+id/layout3"
                     android:background="@color/colorBlue"
                     android:text="Reservation"
+                    android:textAllCaps="false"
                     android:textColor="#FFFFFF"
-                    android:textSize="20sp"
-                    android:textAllCaps="false"/>
+                    android:textSize="20sp" />
 
                 <Button
                     android:id="@+id/btnNew"
@@ -171,9 +169,9 @@
                     android:layout_marginStart="30dp"
                     android:background="@drawable/stroke_blue"
                     android:text="Walk In"
+                    android:textAllCaps="false"
                     android:textColor="#2E74B6"
-                    android:textSize="20sp"
-                    android:textAllCaps="false"/>
+                    android:textSize="20sp" />
 
             </LinearLayout>
 

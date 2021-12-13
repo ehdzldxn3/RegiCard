@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -30,6 +31,8 @@ public class RegistrationCardListFragment extends Fragment {
 
     String ver;
 
+    TextView textName, textTel, textCompany;
+
     //뷰를 만들고
     //초기화
     @Nullable
@@ -39,7 +42,21 @@ public class RegistrationCardListFragment extends Fragment {
         adapter = new RegistrationAdapter();
         adapter.setActivity((MainActivity) getActivity());
         Bundle bundle = getArguments();
+
         ver = bundle.getString("ver");
+
+        //아이디 찾기
+        textName = viewGroup.findViewById(R.id.textName);
+        textTel = viewGroup.findViewById(R.id.textTel);
+        textCompany = viewGroup.findViewById(R.id.textCompany);
+
+
+        //버전체크
+        if(bundle.getString("ver") == "KOR") {
+            verKorchange();
+        }
+
+
         return viewGroup;
     }
 
@@ -48,6 +65,8 @@ public class RegistrationCardListFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+
 
         //리싸이클러아이디 찾기
         rView = view.findViewById(R.id.rView);
@@ -58,5 +77,11 @@ public class RegistrationCardListFragment extends Fragment {
         adapter.setList(list);
         adapter.setVer(ver);
         rView.setAdapter(adapter);
+    }
+
+    public void verKorchange() {
+        textName.setText("이름");
+        textTel.setText("전화번호");
+        textCompany.setText("회사");
     }
 }

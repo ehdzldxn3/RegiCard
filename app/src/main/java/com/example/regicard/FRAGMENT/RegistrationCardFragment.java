@@ -95,7 +95,7 @@ public class RegistrationCardFragment extends Fragment {
                         @Override
                         public void onResponse(Call<List<RegicardDTO>> call, Response<List<RegicardDTO>> response) {
                             List<RegicardDTO> list = response.body(); //데이터 저장
-                            Log.e(TAG, "onResponse: "+response );
+
                             if(list.size() == 1) {
                                 bundle.putString("ver", ver);
                                 bundle.putSerializable("list", (Serializable) list);
@@ -152,11 +152,10 @@ public class RegistrationCardFragment extends Fragment {
         btnNew.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                List<RegicardDTO> list = null;
 
+                ver = verCheck.isChecked() ? "ENG" : "KOR";
                 bundle.putString("ver", ver);
-                bundle.putSerializable("list", (Serializable)list);
-                activity.fragmentChange("OK", bundle);
+                activity.fragmentChange("NEW", bundle);
             }
         });
         return viewGroup;
