@@ -68,7 +68,7 @@ public class RegistrationFolioFragment extends Fragment {
                         if(list.size() == 0) {
                             AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
                             alert.setTitle("알림");
-                            alert.setMessage("데이터가 없습니다.  " );
+                            alert.setMessage("객실번호를 확인해주세요.  " );
                             alert.setPositiveButton("확인", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
                                     dialog.dismiss();     //닫기

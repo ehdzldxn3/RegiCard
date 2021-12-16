@@ -57,7 +57,7 @@ public class RegistrationFolioOkFragment extends Fragment {
 
 
         //메인액티비티 프래그먼트체인지 함수에서 받아온 데이터 저장
-        item = (FolioDTO) bundle.getSerializable("item");
+        item = (FolioDTO) bundle.getSerializable("itemF");
 
         //아이디 찾기
         findId();

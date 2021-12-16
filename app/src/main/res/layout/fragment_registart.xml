@@ -7,9 +7,23 @@
     android:orientation="vertical">
 
     <LinearLayout
+        android:id="@+id/layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btnSetting"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Button" />
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
+        android:layout_below="@id/layout"
         android:layout_alignParentBottom="true"
         android:gravity="center">
 
@@ -21,7 +35,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="THE TEL Smart Front"
-            android:textColor="#FFFFFF"
+            android:textColor="#878787"
             android:textSize="60sp"
             android:textStyle="bold" />
 

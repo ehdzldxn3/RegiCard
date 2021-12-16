@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/editCompany111"
     android:layout_width="match_parent"
@@ -31,7 +32,8 @@
         android:layout_below="@+id/layout1"
         android:layout_alignParentBottom="true"
         android:layout_margin="20dp"
-        android:background="#FFFFFF">
+        android:background="#FFFFFF"
+        tools:ignore="DuplicateIds">
 
         <RelativeLayout
             android:id="@+id/rlayput"
@@ -45,7 +47,6 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
-                android:background="@drawable/bottom_stroke"
                 android:orientation="horizontal">
 
                 <TextView
@@ -66,7 +67,7 @@
                     android:layout_weight="1"
                     android:background="@drawable/stroke_top2_bottom0_left0_right1"
                     android:ems="10"
-                    android:inputType="date"
+                    android:inputType="date|number"
                     android:paddingLeft="5dp"
                     tools:ignore="TouchTargetSizeCheck,DuplicateClickableBoundsCheck,SpeakableTextPresentCheck" />
 
@@ -81,16 +82,32 @@
                     android:textColor="#000000"
                     android:textSize="18sp" />
 
-                <EditText
-                    android:id="@+id/editDepartureDate"
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@drawable/stroke_top2_bottom0_left0_right2"
-                    android:ems="10"
-                    android:inputType="date"
-                    android:paddingLeft="5dp"
-                    tools:ignore="TouchTargetSizeCheck,DuplicateClickableBoundsCheck,SpeakableTextPresentCheck" />
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/editDepartureDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/stroke_top2_bottom0_left0_right1"
+                        android:ems="8"
+                        android:inputType="none"
+                        android:paddingLeft="5dp"
+                        tools:ignore="TouchTargetSizeCheck,DuplicateClickableBoundsCheck,SpeakableTextPresentCheck" />
+
+                    <ImageButton
+                        android:id="@+id/btnDD"
+                        android:layout_width="42.5dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/stroke_top2_bottom0_left0_right2"
+                        app:srcCompat="@android:drawable/sym_action_email"
+                        tools:ignore="SpeakableTextPresentCheck" />
+                </LinearLayout>
 
             </LinearLayout>
 
@@ -200,7 +217,7 @@
                     android:layout_weight="1"
                     android:background="@drawable/stroke_top1_bottom0_left0_right2"
                     android:ems="10"
-                    android:inputType="textPersonName"
+                    android:inputType="number"
                     android:paddingLeft="5dp"
                     tools:ignore="TouchTargetSizeCheck,DuplicateClickableBoundsCheck,SpeakableTextPresentCheck" />
 
@@ -249,17 +266,58 @@
                     android:textColor="#000000"
                     android:textSize="18sp" />
 
-                <EditText
-                    android:id="@+id/editTel"
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@drawable/stroke_top1_bottom0_left0_right2"
-                    android:ems="10"
-                    android:hint=" - cannot be entered"
-                    android:inputType="phone"
-                    android:paddingLeft="5dp"
-                    tools:ignore="DuplicateIds,TouchTargetSizeCheck" />
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/editTel1"
+                        android:layout_width="53dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="3dp"
+                        android:layout_marginTop="3dp"
+                        android:layout_marginEnd="3dp"
+                        android:layout_marginBottom="3dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/stroke1"
+                        android:ems="4"
+                        android:gravity="center"
+                        android:inputType="phone"
+                        android:text="010" />
+
+                    <EditText
+                        android:id="@+id/editTel2"
+                        android:layout_width="72dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="3dp"
+                        android:layout_marginTop="3dp"
+                        android:layout_marginEnd="3dp"
+                        android:layout_marginBottom="3dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/stroke1"
+                        android:ems="4"
+                        android:gravity="center"
+                        android:hint="1234"
+                        android:inputType="phone" />
+
+                    <EditText
+                        android:id="@+id/editTel3"
+                        android:layout_width="72dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="3dp"
+                        android:layout_marginTop="3dp"
+                        android:layout_marginEnd="6dp"
+                        android:layout_marginBottom="3dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/stroke1"
+                        android:ems="4"
+                        android:gravity="center"
+                        android:hint="5678"
+                        android:inputType="phone" />
+                </LinearLayout>
 
             </LinearLayout>
 
@@ -420,16 +478,31 @@
                     android:textColor="#000000"
                     android:textSize="18sp" />
 
-                <EditText
-                    android:id="@+id/editPurposeofVisit"
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@drawable/stroke_top1_bottom2_left0_right2"
-                    android:ems="10"
-                    android:inputType="textPersonName"
-                    android:paddingLeft="5dp"
-                    tools:ignore="DuplicateIds,TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+                    android:orientation="horizontal">
+
+                    <CheckBox
+                        android:id="@+id/checkSeminar"
+                        android:layout_width="106.5dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:buttonTint="#000000"
+                        android:text="Seminar"
+                        tools:ignore="TouchTargetSizeCheck" />
+
+                    <CheckBox
+                        android:id="@+id/checkInvitation"
+                        android:layout_width="106.5dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:buttonTint="#000000"
+                        android:text="Invitation"
+                        tools:ignore="TouchTargetSizeCheck" />
+                </LinearLayout>
 
             </LinearLayout>
 

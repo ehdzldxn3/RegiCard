@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -87,7 +88,17 @@ public class RegistrationCardFragment extends Fragment {
                 ver = verCheck.isChecked() ? "ENG" : "KOR";
 
                 if(res.equals("") && phone.equals("") && name.equals("")){
-                    Toast.makeText(getActivity(), "예약번호 & 이름 & 전화번호 한개라도 입력해주세요.", Toast.LENGTH_SHORT).show();
+                    AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
+                    alert.setTitle("알림");
+                    alert.setMessage("데이터를 입력 해주세요.  " );
+                    alert.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();     //닫기
+                        }
+                    });
+                    AlertDialog dialog = alert.show();       // alert.setMessage 글자 폰트 사이즈 조정
+                    TextView msgView = (TextView) dialog.findViewById(android.R.id.message);
+                    msgView.setTextSize(20);
                     return;
                 } else {
                     Call<List<RegicardDTO>> request = service.Regicard(res,phone,name);
@@ -122,12 +133,8 @@ public class RegistrationCardFragment extends Fragment {
                                 AlertDialog dialog = alert.show();       // alert.setMessage 글자 폰트 사이즈 조정
                                 TextView msgView = (TextView) dialog.findViewById(android.R.id.message);
                                 msgView.setTextSize(20);
-                                new android.os.Handler().postDelayed(
-                                        new Runnable() {
-                                            public void run() {
-                                                dialog.dismiss();
-                                            }
-                                        }, 1000);
+
+
                             }
                         }
                         @Override

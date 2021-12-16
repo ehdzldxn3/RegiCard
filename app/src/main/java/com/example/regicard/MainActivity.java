@@ -8,6 +8,9 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import android.app.AlertDialog;
+import android.content.ContentValues;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,6 +19,7 @@ import android.view.MenuItem;
 
 import com.example.regicard.DATA.FolioDTO;
 import com.example.regicard.DATA.RegicardDTO;
+import com.example.regicard.DATABASE.DBHelper;
 import com.example.regicard.FRAGMENT.RegistrationCardFragment;
 import com.example.regicard.FRAGMENT.RegifoliomainFragment;
 import com.example.regicard.FRAGMENT.RegimainFragment;
@@ -37,6 +41,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.LinearLayout;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -62,10 +67,15 @@ public class MainActivity extends AppCompatActivity {
     RegistrationFolioFragment fragment_registration_folio;
     RegistrationFolioOkFragment fragment_registration_folio_ok;
 
-    Button btn_folio, bth_home, btn_regiCard;
+    Button btn_folio, bth_home, btn_regiCard, btnSetting;
 
-    //test
-    testFragment test;
+
+
+
+    //DB
+    DBHelper helper;
+    SQLiteDatabase db;
+    ContentValues values;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,18 +109,36 @@ public class MainActivity extends AppCompatActivity {
         btn_folio = findViewById(R.id.btn_folio);
         bth_home = findViewById(R.id.bth_home);
         btn_regiCard = findViewById(R.id.btn_regiCard);
+        btnSetting = findViewById(R.id.btnSetting);
+
+        //DB
+        helper = new DBHelper(MainActivity.this, "newdb.db", null, 1);
+        db = helper.getWritableDatabase();
+        helper.onCreate(db);
 
 
 
-        //test
-        test = new testFragment();
+        btnSetting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                
+                values = new ContentValues();
+                values.put("coomone_code","asdf");
+                values.put("gubun","asdf");
+                values.put("Description","asdf");
+                db.insert("mytable",null,values);
+            }
+        });
+
+
+
 
         //폴리오 화면 이동
         btn_folio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 fragment_registration_folio.setArguments(bundle);
-                getSupportFragmentManager().beginTransaction().addToBackStack(null).remove(fragment_registration_folio)
+                getSupportFragmentManager().beginTransaction()
                         .replace(R.id.main_frame, fragment_registration_folio).commit();
             }
         });
@@ -119,7 +147,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 fragment_registration_card.setArguments(bundle);
-                getSupportFragmentManager().beginTransaction().addToBackStack(null).remove(fragment_registration_card)
+                getSupportFragmentManager().beginTransaction()
                         .replace(R.id.main_frame, fragment_registration_card).commit();
             }
         });
@@ -232,7 +260,7 @@ public class MainActivity extends AppCompatActivity {
         } else if (change == "FOLIO") {
 
             List<FolioDTO> list = (List<FolioDTO>) bundle.getSerializable("list");
-            bundle.putSerializable("item", (Serializable) list.get(0));
+            bundle.putSerializable("itemF", (Serializable) list.get(0));
             fragment_registration_folio_ok = new RegistrationFolioOkFragment();
             fragment_registration_folio_ok.setArguments(bundle);
             getSupportFragmentManager().beginTransaction().addToBackStack(null)
@@ -241,6 +269,7 @@ public class MainActivity extends AppCompatActivity {
 
             bundle.putString("ver", bundle.getString("ver"));
             bundle.putString("check", "NEW");
+            fragment_registration_card_ok = new RegistrationCardOkFragment();
             fragment_registration_card_ok.setArguments(bundle);
             getSupportFragmentManager().beginTransaction().addToBackStack(null)
                     .replace(R.id.main_frame, fragment_registration_card_ok).commit();

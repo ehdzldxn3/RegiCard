@@ -9,6 +9,8 @@
         <entry key="..\:/Android Project/RegiCard_copy-main/app/src/main/res/drawable/item_stroke_right0.xml" value="0.28671875" />
         <entry key="..\:/Android Project/RegiCard_copy-main/app/src/main/res/drawable/radius.xml" value="0.28671875" />
         <entry key="..\:/Android Project/RegiCard_copy-main/app/src/main/res/drawable/stroke.xml" value="0.28671875" />
+        <entry key="..\:/Android Project/RegiCard_copy-main/app/src/main/res/drawable/stroke0.xml" value="0.275" />
+        <entry key="..\:/Android Project/RegiCard_copy-main/app/src/main/res/drawable/stroke1.xml" value="0.28671875" />
         <entry key="..\:/Android Project/RegiCard_copy-main/app/src/main/res/drawable/stroke_0.xml" value="0.28671875" />
         <entry key="..\:/Android Project/RegiCard_copy-main/app/src/main/res/drawable/stroke_blue.xml" value="0.28671875" />
         <entry key="..\:/Android Project/RegiCard_copy-main/app/src/main/res/drawable/stroke_folio_item_top1_bottom1_left0_right1.xml" value="0.28671875" />
@@ -27,21 +29,23 @@
         <entry key="..\:/Android Project/RegiCard_copy-main/app/src/main/res/drawable/stroke_top2_bottom2_left2_right1.xml" value="0.107421875" />
         <entry key="..\:/Android Project/RegiCard_copy-main/app/src/main/res/layout/activity_main.xml" value="0.22" />
         <entry key="..\:/Android Project/RegiCard_copy-main/app/src/main/res/layout/activity_request.xml" value="0.26323891625615764" />
+        <entry key="..\:/Android Project/RegiCard_copy-main/app/src/main/res/layout/calendar_dialog.xml" value="0.33" />
         <entry key="..\:/Android Project/RegiCard_copy-main/app/src/main/res/layout/folio_list_item.xml" value="0.33" />
+        <entry key="..\:/Android Project/RegiCard_copy-main/app/src/main/res/layout/fragment_date_picker.xml" value="0.262890625" />
         <entry key="..\:/Android Project/RegiCard_copy-main/app/src/main/res/layout/fragment_foliomain.xml" value="0.33" />
         <entry key="..\:/Android Project/RegiCard_copy-main/app/src/main/res/layout/fragment_regicard.xml" value="0.20566502463054187" />
         <entry key="..\:/Android Project/RegiCard_copy-main/app/src/main/res/layout/fragment_regimain.xml" value="0.144140625" />
         <entry key="..\:/Android Project/RegiCard_copy-main/app/src/main/res/layout/fragment_registart.xml" value="0.25" />
-        <entry key="..\:/Android Project/RegiCard_copy-main/app/src/main/res/layout/fragment_registration_card.xml" value="0.25" />
-        <entry key="..\:/Android Project/RegiCard_copy-main/app/src/main/res/layout/fragment_registration_card_ok.xml" value="0.33" />
+        <entry key="..\:/Android Project/RegiCard_copy-main/app/src/main/res/layout/fragment_registration_card.xml" value="0.2" />
+        <entry key="..\:/Android Project/RegiCard_copy-main/app/src/main/res/layout/fragment_registration_card_ok.xml" value="0.22" />
         <entry key="..\:/Android Project/RegiCard_copy-main/app/src/main/res/layout/fragment_registration_folio.xml" value="0.25" />
-        <entry key="..\:/Android Project/RegiCard_copy-main/app/src/main/res/layout/fragment_registration_folio_ok.xml" value="0.22" />
+        <entry key="..\:/Android Project/RegiCard_copy-main/app/src/main/res/layout/fragment_registration_folio_ok.xml" value="0.25" />
         <entry key="..\:/Android Project/RegiCard_copy-main/app/src/main/res/layout/fragment_registration_list.xml" value="0.25" />
         <entry key="..\:/Android Project/RegiCard_copy-main/app/src/main/res/layout/listview_folio.xml" value="0.2604679802955665" />
         <entry key="..\:/Android Project/RegiCard_copy-main/app/src/main/res/layout/listview_item.xml" value="0.20344619105199516" />
         <entry key="..\:/Android Project/RegiCard_copy-main/app/src/main/res/layout/registration_list_item.xml" value="0.33" />
         <entry key="..\:/Android Project/RegiCard_copy-main/app/src/main/res/layout/tel_dialog.xml" value="0.5" />
-        <entry key="..\:/Android Project/RegiCard_copy-main/app/src/main/res/layout/test.xml" value="0.5" />
+        <entry key="..\:/Android Project/RegiCard_copy-main/app/src/main/res/layout/test.xml" value="0.25" />
         <entry key="..\:/Android Project/RegiCard_copy-main/app/src/main/res/menu/menu.xml" value="0.5" />
         <entry key="..\:/RegiCard_copy-main/app/src/main/res/layout/fragment_registration_card.xml" value="0.5036458333333333" />
         <entry key="..\:/RegiCard_copy-main/app/src/main/res/layout/fragment_registration_list.xml" value="0.5036458333333333" />
