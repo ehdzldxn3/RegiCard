@@ -1,21 +1,19 @@
 
 package com.example.regicard;
 
-import static androidx.core.content.ContextCompat.getSystemService;
-
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 
 import android.app.AlertDialog;
 import android.content.ContentValues;
+import android.content.DialogInterface;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
-import android.view.MenuItem;
 
 import com.example.regicard.DATA.FolioDTO;
 import com.example.regicard.DATA.RegicardDTO;
@@ -28,20 +26,20 @@ import com.example.regicard.FRAGMENT.RegistrationCardListFragment;
 import com.example.regicard.FRAGMENT.RegistrationCardOkFragment;
 import com.example.regicard.FRAGMENT.RegistrationFolioFragment;
 import com.example.regicard.FRAGMENT.RegistrationFolioOkFragment;
-import com.example.regicard.FRAGMENT.testFragment;
+import com.example.regicard.FRAGMENT.RegistrationSettingFragment;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
-import java.util.Stack;
+
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
-import android.widget.LinearLayout;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -55,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
     Calendar cal = Calendar.getInstance();
     SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
 
-    public static Stack<RegistartFragment> fragmentStack;
+
     Bundle bundle;
 
     //강한별
@@ -66,8 +64,9 @@ public class MainActivity extends AppCompatActivity {
     RegistrationCardListFragment fragment_registration_card_List;
     RegistrationFolioFragment fragment_registration_folio;
     RegistrationFolioOkFragment fragment_registration_folio_ok;
+    RegistrationSettingFragment fragment_registration_setting;
 
-    Button btn_folio, bth_home, btn_regiCard, btnSetting;
+    Button btn_folio, bth_home, btn_regiCard, btn_setting;
 
 
 
@@ -75,7 +74,8 @@ public class MainActivity extends AppCompatActivity {
     //DB
     DBHelper helper;
     SQLiteDatabase db;
-    ContentValues values;
+    String TAG =  "MainActivity";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,35 +100,41 @@ public class MainActivity extends AppCompatActivity {
         fragment_registration_card = new RegistrationCardFragment();
         fragment_registration_card_List = new RegistrationCardListFragment();
         fragment_registration_folio = new RegistrationFolioFragment();
+
         bundle = new Bundle();
         
         //상단 액션바 숨기기
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
+
         //하단 네비게이션 버튼
         btn_folio = findViewById(R.id.btn_folio);
         bth_home = findViewById(R.id.bth_home);
         btn_regiCard = findViewById(R.id.btn_regiCard);
-        btnSetting = findViewById(R.id.btnSetting);
+        btn_setting = findViewById(R.id.btn_setting);
 
         //DB
-        helper = new DBHelper(MainActivity.this, "newdb.db", null, 1);
-        db = helper.getWritableDatabase();
-        helper.onCreate(db);
+        helper = DBHelper.getInstance(MainActivity.this); //디비얻어옴
+        db = helper.getWritableDatabase();  //디비 열기
+        String sql = "select * from COMMON;";   //
+        Cursor c = db.rawQuery(sql, null);
+        //데이터 없으면 알림창
+        if(c.getCount() == 0) {
+            AlertDialog.Builder alert = new AlertDialog.Builder(this);
+            alert.setTitle("알림");
+            alert.setMessage("기본정보를 셋팅해주세요!.  " );
+            alert.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();     //닫기
+                }
+            });
+            AlertDialog dialog = alert.show();       // alert.setMessage 글자 폰트 사이즈 조정
+            TextView msgView = (TextView) dialog.findViewById(android.R.id.message);
+            msgView.setTextSize(20);
+        }
 
 
 
-        btnSetting.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                
-                values = new ContentValues();
-                values.put("coomone_code","asdf");
-                values.put("gubun","asdf");
-                values.put("Description","asdf");
-                db.insert("mytable",null,values);
-            }
-        });
 
 
 
@@ -160,7 +166,16 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        btn_setting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.main_frame, new RegistrationSettingFragment()).commit();
+            }
+        });
+
     }
+
 
 
 

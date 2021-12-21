@@ -5,10 +5,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ServiceGenerator{
-//    private static final String URL = "http://192.168.0.61:5408/";
-//    private static final String URL = "http://192.168.0.10:98/";
-//    private static final String URL = "http://192.168.0.177:8080/AM/";
-//    private static final String URL = "http://localhost:8083/";    //test
+
     private static final String URL = "http://192.168.0.177:8080/";
 
 

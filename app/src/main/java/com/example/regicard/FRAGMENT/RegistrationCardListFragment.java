@@ -66,8 +66,6 @@ public class RegistrationCardListFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-
-
         //리싸이클러아이디 찾기
         rView = view.findViewById(R.id.rView);
 

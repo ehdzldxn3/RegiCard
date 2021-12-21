@@ -3,6 +3,8 @@ package com.example.regicard.FRAGMENT;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
@@ -12,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.CheckBox;
@@ -19,8 +22,8 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
+import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -30,6 +33,7 @@ import androidx.fragment.app.Fragment;
 
 
 import com.example.regicard.DATA.RegicardDTO;
+import com.example.regicard.DATABASE.DBHelper;
 import com.example.regicard.MainActivity;
 import com.example.regicard.R;
 import com.example.regicard.RETROFIT.RetrofitService;
@@ -45,7 +49,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -107,6 +111,13 @@ public class RegistrationCardOkFragment<editTe> extends Fragment {
     String phone;
     String check;
     RegicardDTO item;
+    Spinner spinnerNationality; //국적
+
+    //DB
+    DBHelper helper;
+    SQLiteDatabase db;
+    ArrayList<String> nationality;   //국적
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -129,7 +140,7 @@ public class RegistrationCardOkFragment<editTe> extends Fragment {
         //달력버튼 조회해서 오면 클릭불가 & Warek In 셋팅에서는 true
         btnDD.setEnabled(false);
 
-
+        //퇴실일자 & 숙박일수 클릭 금지
         editDepartureDate.setClickable(false);
         editDepartureDate.setFocusable(false);
         editNights.setClickable(false);
@@ -139,6 +150,7 @@ public class RegistrationCardOkFragment<editTe> extends Fragment {
         if (bundle.getString("ver") == "KOR") {
             verKorchange();
         }
+
         //아이템셋팅
         if( item != null) {
             setItem(item);
@@ -355,6 +367,33 @@ public class RegistrationCardOkFragment<editTe> extends Fragment {
         });
 
 
+
+
+
+//        helper = new DBHelper(activity, "newdb.db", null, 1);   //DB 초기화
+//        db = helper.getWritableDatabase();  //
+//        helper.onCreate(db);
+//        String sql = "select * from mytable;";   //"select * from mytable where Description like 'a%';";
+//        Cursor c = db.rawQuery(sql, null);
+//        nationality = new ArrayList<String>();
+//
+//        //모든 국적 다 저장
+//        while(c.moveToNext()){
+//            nationality.add(c.getString(0));
+//        }
+//
+//
+//
+//        //스피너
+//        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+//                activity,
+//                R.layout.spinner_item,
+//                nationality
+//        );
+//
+//        spinnerNationality.setAdapter(adapter);
+
+
        return viewGroup;
 
     }
@@ -430,13 +469,13 @@ public class RegistrationCardOkFragment<editTe> extends Fragment {
         textNights.setText("숙박일수");
         textAdult.setText("어른");
         textChild.setText("어린이");
-        textName.setText("성명");
+        textName.setText("고객명");
         textTel.setText("연락처");
         textAddr.setText("주소");
         textCarNo.setText("차량번호");
         textCompany.setText("회사");
         textNationality.setText("국적");
-        textPassportNo.setText("주민등록번호");
+        textPassportNo.setText("고객구분");
         textPurposeofVisit.setText("방문목적");
         textRemark.setText("기타사항");
         textConsent.setText("개인정보의 제공 및 활용에 동의 하십니까?");
@@ -498,6 +537,9 @@ public class RegistrationCardOkFragment<editTe> extends Fragment {
 
         //scrollView
         scrollView = viewGroup.findViewById(R.id.scrollView);
+
+        //국적 스피너
+        spinnerNationality = viewGroup.findViewById(R.id.spinnerNationality);
     }
 
     //save 함수

@@ -62,9 +62,6 @@ public class RegistrationAdapter extends RecyclerView.Adapter<RegistrationAdapte
         return list.size();
     }
 
-
-
-
     //뷰홀더클래스 : 리싸이클러뷰에서 한줄의 아이템뷰
     class RegistrationViewHoder extends RecyclerView.ViewHolder{
         TextView textName, textTel, textCompanynm;

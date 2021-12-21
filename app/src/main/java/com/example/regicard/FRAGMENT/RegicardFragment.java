@@ -37,7 +37,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import android.app.FragmentManager;
 
-import static com.example.regicard.MainActivity.fragmentStack;
+
 
  public class RegicardFragment extends Fragment {
     ViewGroup viewGroup;
@@ -197,7 +197,7 @@ import static com.example.regicard.MainActivity.fragmentStack;
                         FragmentManager fragmentManager = getActivity().getFragmentManager();
                         fragmentManager.beginTransaction().remove(RegicardFragment.this).commit();
                         fragmentManager.popBackStack();
-                        fragmentStack.clear();
+
 
                     } else {
                         AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
@@ -218,7 +218,7 @@ import static com.example.regicard.MainActivity.fragmentStack;
                         FragmentManager fragmentManager = getActivity().getFragmentManager();
                         fragmentManager.beginTransaction().remove(RegicardFragment.this).commit();
                         fragmentManager.popBackStack();
-                        fragmentStack.clear();
+
                     }
                 }
 

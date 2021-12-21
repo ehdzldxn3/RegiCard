@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -27,7 +28,7 @@ import android.text.style.StyleSpan;
 
 
 import com.example.regicard.R;
-import static com.example.regicard.MainActivity.fragmentStack;
+
 
 public class RegistartFragment extends Fragment {
 
@@ -63,6 +64,10 @@ public class RegistartFragment extends Fragment {
         spannableString.setSpan(new RelativeSizeSpan(1), start, end, SpannableString.SPAN_EXCLUSIVE_EXCLUSIVE);
 
         textStart.setText(spannableString);
+
+
+
+
 
     }
 }
