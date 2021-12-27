@@ -1,6 +1,7 @@
 package com.example.regicard.FRAGMENT;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -26,6 +27,8 @@ import com.example.regicard.RETROFIT.RetrofitService;
 import com.example.regicard.RETROFIT.ServiceGenerator;
 
 
+import org.w3c.dom.Text;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -41,19 +44,20 @@ public class RegistrationCardFragment extends Fragment {
     //버튼
     Button btnOK, btnNew;
 
+    //TextView
+    TextView text001, text002;
+    
     //에딧텍스트
     EditText editText1, editText2, editText3;
 
     //checkBox
     CheckBox verCheck;  //버전체크
-
-    //
-    Bundle bundle = new Bundle();
-
+    
     MainActivity activity;
-
-    String TAG = "RegistrationCardFragment ";
+    
     String res, name, phone, ver; //예약번호, 전화번호, 이름, 버전
+
+    ProgressDialog dialog;
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -74,8 +78,10 @@ public class RegistrationCardFragment extends Fragment {
         editText2 = viewGroup.findViewById(R.id.editText2); //이름
         editText3 = viewGroup.findViewById(R.id.editText3); //전화번호
         verCheck = viewGroup.findViewById(R.id.verCheck); //버전체크
-
-
+        text001 = viewGroup.findViewById(R.id.text001); //호텔명 
+        text002 = viewGroup.findViewById(R.id.text002); //인사말
+        text001.setText(activity.code001);
+        text002.setText(activity.code002);
 
         btnOK.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -101,12 +107,17 @@ public class RegistrationCardFragment extends Fragment {
                     msgView.setTextSize(20);
                     return;
                 } else {
+                    dialog = new ProgressDialog(getContext());
+                    dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                    dialog.setMessage("Loading...");
+
+                    dialog.show();
                     Call<List<RegicardDTO>> request = service.Regicard(res,phone,name);
                     request.enqueue(new Callback<List<RegicardDTO>>() {
                         @Override
                         public void onResponse(Call<List<RegicardDTO>> call, Response<List<RegicardDTO>> response) {
                             List<RegicardDTO> list = response.body(); //데이터 저장
-
+                            dialog.dismiss();
                             if(list.size() == 1) {
                                 bundle.putString("ver", ver);
                                 bundle.putSerializable("list", (Serializable) list);
@@ -139,6 +150,7 @@ public class RegistrationCardFragment extends Fragment {
                         }
                         @Override
                         public void onFailure(Call<List<RegicardDTO>> call, Throwable t) {
+                            dialog.dismiss();
                             AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
                             alert.setTitle("알림");
                             alert.setMessage("통신 에러 입니다.  " + t);

@@ -7,7 +7,6 @@ import android.content.DialogInterface;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,12 +19,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.regicard.ADAPTER.FolioAdapter;
-import com.example.regicard.ADAPTER.OnSettinItemClickListener;
-import com.example.regicard.ADAPTER.RegistrationAdapter;
 import com.example.regicard.ADAPTER.SettingAdapter;
 import com.example.regicard.DATA.CommonDTO;
-import com.example.regicard.DATA.RegicardDTO;
 import com.example.regicard.DATABASE.DBHelper;
 import com.example.regicard.MainActivity;
 import com.example.regicard.R;
@@ -107,8 +102,12 @@ public class RegistrationSettingFragment extends Fragment {
                     TextView msgView = (TextView) dialog.findViewById(android.R.id.message);
                     msgView.setTextSize(20);
                     return;
-                } else {     //코드가 중복 안되게 검사
-
+                } else if(check == "update"){      //업데이트
+                    ContentValues values = new ContentValues();
+                    values.put("REMARK",remark);
+                    db.update("COMMON",values,"CODE=?", new String[]{code});
+                    dbList();
+                } else {    //신규저장시 //코드가 중복 안되게 검사
                     //select * from COMMON where CODE ='code';
                     String sql = "select * from COMMON where CODE =" + "'" +code +"';";
 
@@ -126,13 +125,14 @@ public class RegistrationSettingFragment extends Fragment {
                         msgView.setTextSize(20);
                         return;
                     }
-                }
                     ContentValues values = new ContentValues();
                     values.put("CODE", code);
                     values.put("REMARK", remark);
                     db.insert("COMMON",null,values);
                     dbList();
-                    check = "save";
+                }
+                check = "save";
+                editCode.setEnabled(true);
             }
         });
 
@@ -140,9 +140,7 @@ public class RegistrationSettingFragment extends Fragment {
         btnD.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                check = "delete";
                 String code = editCode.getText().toString();
-
                 //데이터 미 입력시 거르는곳
                 if(code.equals("")) {
                     alert.setTitle("알림");
@@ -158,6 +156,8 @@ public class RegistrationSettingFragment extends Fragment {
                     return;
                 }
                 db.delete("COMMON","CODE=?",new String[]{code});
+                dbList();
+                check = "delete";
             }
         });
 
@@ -165,9 +165,11 @@ public class RegistrationSettingFragment extends Fragment {
         btnN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //새로 입력시 입력불가 품
                 check = "new";
                 editCode.setText("");
                 editRemark.setText("");
+                editCode.setEnabled(true);
             }
         });
         return viewGroup;
@@ -188,14 +190,16 @@ public class RegistrationSettingFragment extends Fragment {
 
     //리싸이클러뷰 클릭 이벤트
     public void onItemClick(CommonDTO item) {
-        check = "update";
         editCode.setText(item.getCode());
         editRemark.setText(item.getRemark());
+        check = "update";
+        editCode.setEnabled(false);
     }
 
     //DB 테이블 전체조회
     public void dbList() {
-
+        editCode.setText("");
+        editRemark.setText("");
         //리스트 초기화
         list = new ArrayList<>();
         //리스트 생성

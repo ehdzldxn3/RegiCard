@@ -1,12 +1,15 @@
 package com.example.regicard.RETROFIT;
 
+import com.example.regicard.MainActivity;
+
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ServiceGenerator{
 
-    private static final String URL = "http://192.168.0.177:8080/";
+    private static final String URL = "http://"+ MainActivity.code003 + ":" + MainActivity.code004;
+
 
 
     private static OkHttpClient.Builder httpClient = new OkHttpClient.Builder();

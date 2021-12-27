@@ -1,14 +1,17 @@
 package com.example.regicard.FRAGMENT;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,9 +42,15 @@ public class RegistrationFolioFragment extends Fragment {
 
     EditText editFolioRoomNo;
 
+    TextView text001, text002;
+
     MainActivity activity;
 
+    AlertDialog.Builder alert;
+
     String TAG = "Folio";
+
+    ProgressDialog dialog;
 
     @Nullable
     @Override
@@ -50,23 +59,40 @@ public class RegistrationFolioFragment extends Fragment {
         //전화면에서 받아온 데이터
         Bundle bundle = getArguments();
 
+        //알러트창
+
         editFolioRoomNo = viewGroup.findViewById(R.id.editFolioRoomNo);
+        text001 = viewGroup.findViewById(R.id.text001);
+        text002 = viewGroup.findViewById(R.id.text002);
         btnFlioOK = viewGroup.findViewById(R.id.btnFlioOK);
         activity = (MainActivity) getActivity();
+
+
+        text001.setText(MainActivity.code001);
+        text002.setText(MainActivity.code002);
+
+
 
         //확인버튼 클릭리스너너
         btnFlioOK.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                dialog = new ProgressDialog(getContext());
+                dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                dialog.setMessage("Loading...");
+
+                dialog.show();
+
                 RetrofitService service = ServiceGenerator.createService(RetrofitService.class);
                 Call<List<FolioDTO>> request = service.Folio(editFolioRoomNo.getText().toString());
                 request.enqueue(new Callback<List<FolioDTO>>() {
                     @Override
                     public void onResponse(Call<List<FolioDTO>> call, Response<List<FolioDTO>> response) {
-                        List<FolioDTO> list = response.body();
+                        dialog.dismiss();
 
+                        List<FolioDTO> list = response.body();
                         if(list.size() == 0) {
-                            AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
+                            alert = new AlertDialog.Builder(getActivity());
                             alert.setTitle("알림");
                             alert.setMessage("객실번호를 확인해주세요.  " );
                             alert.setPositiveButton("확인", new DialogInterface.OnClickListener() {
@@ -77,6 +103,7 @@ public class RegistrationFolioFragment extends Fragment {
                             AlertDialog dialog = alert.show();       // alert.setMessage 글자 폰트 사이즈 조정
                             TextView msgView = (TextView) dialog.findViewById(android.R.id.message);
                             msgView.setTextSize(20);
+
                         } else {
                             int credit = 0, debit = 0;
                             int balance = 0;
@@ -93,7 +120,8 @@ public class RegistrationFolioFragment extends Fragment {
 
                     @Override
                     public void onFailure(Call<List<FolioDTO>> call, Throwable t) {
-                        AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
+                        dialog.dismiss();
+                        alert = new AlertDialog.Builder(getActivity());
                         alert.setTitle("알림");
                         alert.setMessage("통신 에러 입니다.  " + t);
                         alert.setPositiveButton("확인", new DialogInterface.OnClickListener() {

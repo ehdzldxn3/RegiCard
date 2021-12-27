@@ -60,16 +60,32 @@
                     android:textColor="#000000"
                     android:textSize="18sp" />
 
-                <EditText
-                    android:id="@+id/editArrivalDate"
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@drawable/stroke_top2_bottom0_left0_right1"
-                    android:ems="10"
-                    android:inputType="date|number"
-                    android:paddingLeft="5dp"
-                    tools:ignore="TouchTargetSizeCheck,DuplicateClickableBoundsCheck,SpeakableTextPresentCheck" />
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/editArrivalDate"
+                        android:layout_width="165dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/stroke_top2_bottom0_left0_right1"
+                        android:ems="10"
+                        android:inputType="date"
+                        android:paddingLeft="5dp"
+                        tools:ignore="TouchTargetSizeCheck,DuplicateClickableBoundsCheck,SpeakableTextPresentCheck" />
+
+                    <ImageButton
+                        android:id="@+id/btnAD"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/stroke_top2_bottom0_left0_right1"
+                        app:srcCompat="@drawable/ic_date_range_2x"
+                        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+                </LinearLayout>
 
                 <TextView
                     android:id="@+id/textDepartureDate"
@@ -90,23 +106,23 @@
 
                     <EditText
                         android:id="@+id/editDepartureDate"
-                        android:layout_width="wrap_content"
+                        android:layout_width="165dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:background="@drawable/stroke_top2_bottom0_left0_right1"
-                        android:ems="8"
+                        android:ems="10"
                         android:inputType="none"
                         android:paddingLeft="5dp"
                         tools:ignore="TouchTargetSizeCheck,DuplicateClickableBoundsCheck,SpeakableTextPresentCheck" />
 
                     <ImageButton
                         android:id="@+id/btnDD"
-                        android:layout_width="42.5dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:background="@drawable/stroke_top2_bottom0_left0_right2"
-                        app:srcCompat="@android:drawable/sym_action_email"
-                        tools:ignore="SpeakableTextPresentCheck" />
+                        app:srcCompat="@drawable/ic_date_range_2x"
+                        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -551,15 +567,17 @@
                 android:layout_below="@+id/layout9"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginTop="15dp"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="14dp"
+                android:layout_marginEnd="0dp"
                 android:background="@drawable/stroke">
 
                 <TextView
-                    android:id="@+id/textView16"
+                    android:id="@+id/textView"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:padding="10dp"
-                    android:text="호텔은 서비스를 제공 하기 위해 아래와 같이 본인의 개인정보를 수집 하고 있습니다. \n필수적인 개인정보의 수집 이용에 관한 사항                                  \n(1) 수집 이용 항목 : 성명, 생년월일,주소,전화번호,국적, 이메일                                 \n(2) 수집 이용 목적 : 본인식별, 서비스 및 정보 제공, 분실물, 민원 처리 등                                 \n(3) 보유 이용 기간 : 수집 이용 동의일로 부터(체크인) 3년간                                 \n ※ 위 사항에 대한 동의를 거부하실 수 있으며, 다만 이 경우 투숙 및 서비스 제공이 제한 될 수 있습니다. \n testtesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttest"
+                    android:text="The hotel collects personal information as follows to provide services. \nMatters concerning the collection and use of essential personal information \nItems used for collection : name, address, phone number, nationality \nPurpose of collection and use: identification of identity, provision of services and information, lost items, civil complaint handling, etc. \nRetention period: 3 years from the date of consent to collection and use (check-in) \nYou may refuse to agree to the above, but in this case,  accommodation and service provision may be restricted."
                     android:textSize="20sp" />
             </ScrollView>
 
@@ -581,7 +599,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
                     android:gravity="center"
-                    android:text="Do you agree to use your personal information?     "
+                    android:text="Do you agree to the collection and use of personal information?    "
                     android:textColor="#000000"
                     android:textSize="20sp" />
 
@@ -643,21 +661,21 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/textView17"
+                    android:id="@+id/textBottom1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:paddingTop="5dp"
-                    android:text="상호. (재)출판도시문화재단 / 사업자등록번호. 128-82-08500 / Tel. 031)-9550-0090 / www.jijihyang.com" />
+                    android:text="" />
 
                 <TextView
-                    android:id="@+id/textView18"
+                    android:id="@+id/textBottom2"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="Add. 경기도 파주시 회룡길 145 아시아 출판문화도시쎈터 라이브러리 스테이 지지향" />
+                    android:text="" />
             </LinearLayout>
         </RelativeLayout>
     </ScrollView>

@@ -31,7 +31,7 @@ public class RegistrationCardListFragment extends Fragment {
 
     String ver;
 
-    TextView textName, textTel, textCompany;
+    TextView textName, textTel, textCompany, text001;
 
     //뷰를 만들고
     //초기화
@@ -49,6 +49,8 @@ public class RegistrationCardListFragment extends Fragment {
         textName = viewGroup.findViewById(R.id.textName);
         textTel = viewGroup.findViewById(R.id.textTel);
         textCompany = viewGroup.findViewById(R.id.textCompany);
+        text001 = viewGroup.findViewById(R.id.text001);
+
 
 
         //버전체크
@@ -81,5 +83,6 @@ public class RegistrationCardListFragment extends Fragment {
         textName.setText("이름");
         textTel.setText("전화번호");
         textCompany.setText("회사");
+        text001.setText(MainActivity.code001);
     }
 }

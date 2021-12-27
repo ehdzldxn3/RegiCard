@@ -3,19 +3,17 @@ package com.example.regicard.DATABASE;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.os.Environment;
+import android.util.Log;
+
+import java.io.File;
 
 public class DBHelper extends SQLiteOpenHelper {
 
-    //데이터베이스 버전
-    private static final int DATABASE_VERSION=1;
-    //데이터베이스 이름
-    private static final String DATABASE_NAME="SMARTFRONT.db";
-    //테이블 이름
-    private static final String TABLE_NAME="COMMON";
 
-    //Table Columns
-    private static final String DATA_ID="CODE";
-    private static final String DATA_NAME="REMARK";
+    //데이터베이스 이름
+    //private static final String Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + SQLITE_FILE;
+    private static final String DATABASE_NAME= Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)+ File.separator+"test"+File.separator+"SMARTFRONT.db"; //
 
 
     //SingleTon Pattern(싱글톤 패턴)
@@ -23,11 +21,16 @@ public class DBHelper extends SQLiteOpenHelper {
 
 
     public DBHelper(Context context) {
-        super(context,DATABASE_NAME,null,DATABASE_VERSION);
+        super(context, DATABASE_NAME,null,1);
+        String TAG = "TAG";
+
+        Log.e(TAG, ""+context );
+        Log.e(TAG, ""+DATABASE_NAME );
     }
 
     //SingleTon Pattern(싱글톤 패턴)
     public static DBHelper getInstance(Context context) {
+
         if(dbInstance==null)
             dbInstance = new DBHelper(context);
         return dbInstance;

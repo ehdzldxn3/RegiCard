@@ -40,7 +40,7 @@
             android:paddingTop="5dp"
             android:paddingBottom="5dp"
             android:gravity="center"
-            android:id="@+id/content1"
+            android:id="@+id/text002"
             android:text="@string/content1"
             android:textColor="@android:color/black"
             android:textSize="30dp" />

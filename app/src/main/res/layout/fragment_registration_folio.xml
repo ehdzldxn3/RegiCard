@@ -14,6 +14,7 @@
         android:layout_height="wrap_content">
 
         <TextView
+            android:id="@+id/text001"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -35,7 +36,7 @@
         android:weightSum="10">
 
         <TextView
-            android:id="@+id/content1"
+            android:id="@+id/text002"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
