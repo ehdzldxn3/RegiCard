@@ -13,7 +13,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     //데이터베이스 이름
     //private static final String Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + SQLITE_FILE;
-    private static final String DATABASE_NAME= Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)+ File.separator+"test"+File.separator+"SMARTFRONT.db"; //
+    private static final String DATABASE_NAME= Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)+ File.separator+"SMARTFRONT3"+File.separator+"SMARTFRONT.db"; //
 
 
     //SingleTon Pattern(싱글톤 패턴)
@@ -22,10 +22,6 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public DBHelper(Context context) {
         super(context, DATABASE_NAME,null,1);
-        String TAG = "TAG";
-
-        Log.e(TAG, ""+context );
-        Log.e(TAG, ""+DATABASE_NAME );
     }
 
     //SingleTon Pattern(싱글톤 패턴)

@@ -123,27 +123,28 @@ public class MainActivity extends AppCompatActivity {
         bth_home = findViewById(R.id.bth_home);
         btn_regiCard = findViewById(R.id.btn_regiCard);
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-        String TAG = "메인액티비티";
-        String test = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + File.separator + "SMARTFRONT.db";
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)+ File.separator+"test");
+        //폴더 없을시 폴더 생성
+        File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)+ File.separator+"SMARTFRONT");
         if(!file.exists())
             file.mkdir();
+
+        //폴더 읽기 권한 설정
         file.setWritable(true);
-        file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)+ File.separator+"test"+File.separator+"SMARTFRONT.db");
+
+        //파일 읽기 권한 설정
+        file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)+ File.separator+"SMARTFRONT2"+File.separator+"SMARTFRONT.db");
         file.setWritable(true);
+
+
         //DB
         helper = DBHelper.getInstance(MainActivity.this); //디비얻어옴
-
         db = helper.getWritableDatabase();  //디비 열기
 
 
 
 
         //DataBase 조회
-        //startSql();
+        startSql();
 
         //폴리오 화면 이동
         btn_folio.setOnClickListener(new View.OnClickListener() {
