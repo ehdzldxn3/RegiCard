@@ -41,7 +41,7 @@
             android:gravity="center"
             android:paddingTop="10dp"
             android:paddingBottom="5dp"
-            android:text="@string/content3"
+            android:text=""
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:textColor="@android:color/black" />
 
@@ -135,7 +135,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:ems="20"
-                    android:hint="뒷번호만 입력해주세요"
+                    android:hint="4자리만 입력해주세요"
                     android:inputType="phone" />
             </LinearLayout>
 
